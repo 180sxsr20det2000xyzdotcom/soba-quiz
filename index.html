@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>相場クイズ</title>
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+  :root {
+    --bg: #f4f6f8; --card: #ffffff; --text: #1f2933; --sub: #616e7c;
+    --line: #dde3ea; --accent: #0f766e; --accent-soft: #e6f4f2;
+    --ok: #15803d; --ok-soft: #e8f6ec; --ng: #c2410c; --ng-soft: #fdeee6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161b; --card: #1c232b; --text: #e6eaef; --sub: #9aa5b1;
+      --line: #2c3640; --accent: #2dd4bf; --accent-soft: #163a37;
+      --ok: #4ade80; --ok-soft: #173325; --ng: #fb923c; --ng-soft: #3a2316;
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    font-size: 16px; line-height: 1.6;
+    padding: env(safe-area-inset-top) 16px calc(24px + env(safe-area-inset-bottom));
+  }
+  main { max-width: 560px; margin: 0 auto; }
+  header { display: flex; align-items: center; gap: 8px; padding: 16px 0 8px; }
+  header h1 { font-size: 20px; margin: 0; flex: 1; }
+  .icon-btn { background: none; border: none; color: var(--sub); font-size: 15px; padding: 8px; cursor: pointer; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin: 12px 0; }
+  .muted { color: var(--sub); font-size: 14px; }
+  .cat-btn {
+    display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+    background: var(--card); color: var(--text); border: 1px solid var(--line);
+    border-radius: 14px; padding: 14px 16px; margin: 10px 0; font-size: 17px; cursor: pointer;
+  }
+  .cat-btn:active { transform: scale(0.99); }
+  .cat-btn .emoji { font-size: 26px; }
+  .cat-btn .body { flex: 1; }
+  .cat-btn .meta { font-size: 13px; color: var(--sub); }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin-top: 6px; }
+  .bar > span { display: block; height: 100%; background: var(--accent); }
+  .primary {
+    display: block; width: 100%; background: var(--accent); color: #fff; border: none;
+    border-radius: 12px; padding: 14px; font-size: 17px; font-weight: 600; cursor: pointer; margin-top: 12px;
+  }
+  @media (prefers-color-scheme: dark) { .primary { color: #0b1a18; } }
+  .secondary {
+    display: block; width: 100%; background: transparent; color: var(--accent);
+    border: 1px solid var(--accent); border-radius: 12px; padding: 12px; font-size: 16px; cursor: pointer; margin-top: 10px;
+  }
+  .secondary:disabled { opacity: .4; cursor: default; }
+  .q-head { display: flex; justify-content: space-between; font-size: 14px; color: var(--sub); }
+  .q-text { font-size: 18px; font-weight: 600; margin: 8px 0 4px; }
+  .choice {
+    display: block; width: 100%; text-align: left; background: var(--card); color: var(--text);
+    border: 2px solid var(--line); border-radius: 12px; padding: 12px 14px; margin: 10px 0;
+    font-size: 16px; cursor: pointer;
+  }
+  .choice.correct { border-color: var(--ok); background: var(--ok-soft); }
+  .choice.wrong { border-color: var(--ng); background: var(--ng-soft); }
+  .choice:disabled { cursor: default; color: var(--text); }
+  .feedback { border-radius: 12px; padding: 12px 14px; margin-top: 4px; }
+  .feedback.ok { background: var(--ok-soft); }
+  .feedback.ng { background: var(--ng-soft); }
+  .feedback b { display: block; margin-bottom: 4px; }
+  .feedback.ok b { color: var(--ok); } .feedback.ng b { color: var(--ng); }
+  .score { font-size: 44px; font-weight: 700; text-align: center; margin: 8px 0 0; }
+  .center { text-align: center; }
+  .review-item { border-top: 1px solid var(--line); padding: 10px 0; font-size: 15px; }
+  .review-item:first-child { border-top: none; }
+  .review-item .a { color: var(--ok); font-weight: 600; }
+  .row { display: flex; gap: 8px; }
+  .row > * { flex: 1; }
+  .seg { display: flex; gap: 6px; margin-top: 8px; }
+  .seg button {
+    flex: 1; padding: 8px 0; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--card); color: var(--text); font-size: 15px; cursor: pointer;
+  }
+  .seg button.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script src="questions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
